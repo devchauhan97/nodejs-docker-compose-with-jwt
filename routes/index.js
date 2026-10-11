@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
-
+const os = require('os');
 if (!stripeSecretKey) {
   throw new Error('STRIPE_SECRET_KEY is missing. Add it to your .env file.');
 }
@@ -21,6 +21,10 @@ router.use('/auth', authRouter);
 router.use('/users', userRouter);
 router.use('/hotels', hotelRouter);
 
+router.get('/health',(req, res) => {
+   console.log(`Health check requested. Container ID: ${os.hostname()}`);
+    res.send(`Hello from Node.js instance! Container ID: ${os.hostname()}\n`);
+});
 
 router.get('/create-payment-intent', async (req, res) => {
    
