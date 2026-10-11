@@ -1,0 +1,35 @@
+{
+  "name": "nodejs",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "@temporalio/client": "^1.11.0",
+    "@temporalio/common": "^1.11.0",
+    "@temporalio/workflow": "^1.11.0",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^4.22.2",
+    "express-rate-limit": "^8.7.0",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.24.1",
+    "nodemon": "^3.1.9",
+    "rate-limit-redis": "^6.0.1",
+    "redis": "^6.2.1",
+    "sequelize": "^6.37.8",
+    "stripe": "^22.6.2",
+    "utf8": "^3.0.0"
+  },
+  "packages": {},
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "sequelize-cli": "^6.6.5"
+  }
+}
