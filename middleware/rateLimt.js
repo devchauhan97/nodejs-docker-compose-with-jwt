@@ -19,8 +19,8 @@ redisClient.on('error', (err) => console.error('Redis Client Error', err));
 })();
 
 const  productGetLimiter = rateLimit({
-  windowMs: 14000, // 15 minutes
-  max: 5, // limit each IP to 30 requests per windowMs
+  windowMs: 60000, // 15 minutes
+  max: 5, // limit each IP to 5 requests per windowMs
   message: 'Too many requests from this IP, please try again later',
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
@@ -48,8 +48,8 @@ const  productGetLimiter = rateLimit({
 });
 
 const userGetLimiter = rateLimit({
-  windowMs: 15000, // 15 minutes
-  max: 5, // limit each IP to 30 requests per windowMs
+  windowMs: 60000, // 15 minutes
+  max: 5, // limit each IP to 5 requests per windowMs
   message: 'Too many requests from this IP, please try again later',
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
