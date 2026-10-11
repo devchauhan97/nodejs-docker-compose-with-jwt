@@ -15,7 +15,7 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pmy-secret-pw"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD}"]
       interval: 5s
       timeout: 5s
       retries: 12
@@ -50,6 +50,7 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
       REDIS_URL: redis://redis:6379
+            JWT_SECRET: ${JWT_SECRET} # 👈 Add this here so all scaled containers can verify the tokens
     depends_on:
       db:
         condition: service_healthy
@@ -63,7 +64,8 @@ services:
     ports:
       - "8000:80" # Exposed to the public
     depends_on:
-    - node-app
+    node-app:
+      condition: service_started
     
 volumes:
   redis_data:

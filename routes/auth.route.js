@@ -35,7 +35,7 @@ router.post('/login', async (req, res) => {
 
     jwt.sign({
         user: rows[0]
-    }, 'secretkey', { expiresIn: '1m' }, (err, token) => {
+    }, process.env.JWT_SECRET, { expiresIn: '1m' }, (err, token) => {
         if (err) {
             return res.status(500).json({ error: 'Error generating token' });
         }
@@ -45,7 +45,7 @@ router.post('/login', async (req, res) => {
         // Send the token , refresh token  and user information in the response
         const refresh_token = jwt.sign({
             user: rows[0]
-        }, 'refreshsecretkey', { expiresIn: '1d' });
+        }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
         res.cookie('refresh_token', refresh_token, {
             httpOnly: true,
@@ -72,7 +72,7 @@ router.post('/refresh-token', (req, res) => {
         return res.status(401).json({ error: 'Refresh token is required' });
     }
 
-    jwt.verify(refreshToken, 'refreshsecretkey', (error, payload) => {
+    jwt.verify(refreshToken, process.env.JWT_SECRET, (error, payload) => {
         if (error) {
             return res.status(403).json({ error: 'Invalid or expired refresh token' });
         }
